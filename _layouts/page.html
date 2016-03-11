@@ -3,7 +3,13 @@ layout: default
 ---
 
 <!-- Page Header -->
-<header class="intro-header" style="background-color:#F8DA59;" >
+<header class="intro-header" style="background-color:#F8DA59;width: 100%;
+    height: 100%;
+    max-width: 980px;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin: 0px auto;" >
     <div class="container">
         <div class="row" style="background-image: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}')">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">

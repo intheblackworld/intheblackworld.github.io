@@ -7,10 +7,10 @@ layout: default
     <div class="container">
         <div class="row" style="background-image: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}')">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
-                <div class="site-heading">
+                <div class="site-heading" style="text-shadow: 2px 2px 5px black;">
                     <h1>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</h1>
                     <!--<hr class="small">-->
-                    <span class="subheading">{{ page.description }}</span>
+                    <span class="subheading" style="text-shadow: 1px 1px 3px black;">{{ page.description }}</span>
                 </div>
             </div>
         </div>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="css/hux-blog.css">
+<html lang="">
 
 <head>
     <meta charset="utf-8">
@@ -62,7 +62,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">ZuRay Blog</a>
+            <a class="navbar-brand"  href="/">ZuRay Blog</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -124,14 +124,20 @@
 
 
     <!-- Page Header -->
-<header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
+<header class="intro-header" style="background-color:#F8DA59;" >
     <div class="container">
-        <div class="row">
+        <div class="row" style="background-image: url('/img/header-small.gif');width: 100%;
+    height: 100%;
+    max-width: 980px;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin: 0px auto;">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
-                <div class="site-heading">
+                <div class="site-heading" style="text-shadow: 2px 2px 5px black;">
                     <h1>ZuRay Blog</h1>
                     <!--<hr class="small">-->
-                    <span class="subheading">專注在前端的領域</span>
+                    <span class="subheading" style="text-shadow: 1px 1px 3px black;">專注在前端的領域</span>
                 </div>
             </div>
         </div>
@@ -154,151 +160,74 @@
             ">
     			
 <div class="post-preview">
-    <a href="/2015/09/22/js-version/">
+    <a href="/2016/03/13/reactjs1/">
         <h2 class="post-title">
-            Example Post
+            React初探 partI
         </h2>
         
         <h3 class="post-subtitle">
-            ES5, ES6, ES2016, ES.Next: What's going on with JavaScript versioning?
+            createFactory, createClass, createElement差別 ＆React 語法＆React Props
         </h3>
         
         <div class="post-content-preview">
-            JavaScript 有着很奇怪的命名史。
+            目標
 
-1995 年，它作为网景浏览器（Netscape Navigator）的一部分首次发布，网景给这个新语言命名为 LiveScript。一年后，为了搭上当时媒体热炒 Java 的顺风车，临时改名为了 JavaScript （当然，Java 和 JavaScript 的关系，就和雷锋和雷锋塔一样 —— 并没有什么关系）
+  1.理解createFactory, createClass, createElement差別  
+2.some React 語法  
+3.React Props研究
 
 
-歪果仁的笑话怎么一点都不好...
+I.createFactory, createClass, createElement差別
+
+createClass : 建立元件類別，建立React 組件對應的類別，描述你將要創建組件的各種行為
+
+var H...
         </div>
     </a>
     <p class="post-meta">
-        Posted by Hux on September 22, 2015
+        Posted by ZuRay on March 13, 2016
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="/2015/07/09/js-module-7day/">
+    <a href="/2016/03/08/test/">
         <h2 class="post-title">
-            Example Post using Keynote Layout
+            作用域與閉包
         </h2>
         
         <h3 class="post-subtitle">
-            Keynote: JavaScript Modularization Journey
-        </h3>
-        
-        <div class="post-content-preview">
             
-  下滑这里查看更多内容
-
-
-7月9日，我在公司内部进行了名为「JavaScript 模块化七日谈」分享，并将该 Slides 分享到了微博上。出乎意料地，这篇微博先后被 @JS小组 @尤小右 @寸志 等近 200 人转发，阅读达到 10w，获得了还不错的评价。
-
-于是，我决定将它重新发到我的博客上，并为它专门制作了适用于 Keynote 展示文稿的新布局。它能自动根据屏幕大小/旋转以一定...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Hux on July 9, 2015
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2015/05/25/js-module-loader/">
-        <h2 class="post-title">
-            Example Post with Code Highlight
-        </h2>
-        
-        <h3 class="post-subtitle">
-            CommonJS，RequireJS，SeaJS 归纳笔记
         </h3>
         
         <div class="post-content-preview">
-            Foreword
+            目標
 
 
-  Here comes Module!
+  1.理解 js中var的作用域  
+2.了解閉包的概念  
+3.理解this的指向  
 
 
-随着网站逐渐变成「互联网应用程序」，嵌入网页的 JavaScript 代码越来越庞大，越来越复杂。网页越来越像桌面程序，需要一个团队分工协作、进度管理、单元测试……我们不得不使用软件工程的方法，来管理网页的业务逻辑。
+I.var 作用域重點整理
 
-于是，JavaScript 的模块化成为迫切需求。在 ES6 Module 来临之前，JavaScript...
+1.  內部函式可以取用外部函式的變數
+
+2.  外部函式不可取用內部函式的變數(var宣告的變數作用域在函式內)
+
+3.  宣告變數時，不加var，變數會變成全域變數。
+
+II.閉包重點整理
+
+
+  此段落參考理解javascript的閉包
+
+
+1.  閉...
         </div>
     </a>
     <p class="post-meta">
-        Posted by Hux on May 25, 2015
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2015/04/14/unix-linux-note/">
-        <h2 class="post-title">
-            Example Post
-        </h2>
-        
-        <h3 class="post-subtitle">
-            不适合人类阅读，非常水的自我笔记
-        </h3>
-        
-        <div class="post-content-preview">
-            
-  This document is not completed and will be updated anytime.
-
-
-Catagory
-
-
-  Unix
-    
-      Bell Labs
-      Xenix
-      BSD
-      FreeBSD &amp; Apple
-      NeXTStep
-      Darwin
-      POSIX
-    
-...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Hux on April 14, 2015
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2015/01/29/hello-2015/">
-        <h2 class="post-title">
-            Welcome to Hux Blog
-        </h2>
-        
-        <h3 class="post-subtitle">
-             "Hello World, Hello Blog"
-        </h3>
-        
-        <div class="post-content-preview">
-            
-  “Yeah It’s on. ”
-
-
-前言
-
-Hux 的 Blog 就这么开通了。
-
-跳过废话，直接看技术实现 
-
-2015 年，Hux 总算有个地方可以好好写点东西了。
-
-作为一个程序员， Blog 这种轮子要是挂在大众博客程序上就太没意思了。一是觉得大部分 Blog 服务都太丑，二是觉得不能随便定制不好玩。之前因为太懒没有折腾，结果就一直连个写 Blog 的地儿都没有。
-
-在玩了一...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Hux on January 29, 2015
+        Posted by ZuRay on March 8, 2016
     </p>
 </div>
 <hr>
@@ -324,21 +253,13 @@ Hux 的 Blog 就这么开通了。
                     <div class="tags">
                         
                             
-                        
-                            
-                        
-                            
-                        
-                            
-                        
-                            
-                                <a href="/tags/#前端开发" title="前端开发" rel="3">
-                                    前端开发
+                                <a href="/tags/#前端開發" title="前端開發" rel="2">
+                                    前端開發
                                 </a>
                             
                         
                             
-                                <a href="/tags/#JavaScript" title="JavaScript" rel="3">
+                                <a href="/tags/#JavaScript" title="JavaScript" rel="2">
                                     JavaScript
                                 </a>
                             
@@ -437,16 +358,16 @@ Hux 的 Blog 就这么开通了。
                     </li>
                     
                 </ul>
-               <!--  <p class="copyright text-muted">
+                <p class="copyright text-muted">
                     Copyright &copy; ZuRay Blog 2016
                     <br>
-                    Theme by <a href="http://huangxuan.me">Hux</a> |
+                   <!--  Theme by <a href="http://huangxuan.me">Hux</a> |
                     <iframe
                         style="margin-left: 2px; margin-bottom:-5px;"
                         frameborder="0" scrolling="0" width="91px" height="20px"
                         src="https://ghbtns.com/github-btn.html?user=huxpro&repo=huxpro.github.io&type=star&count=true" >
-                    </iframe>
-                </p> -->
+                    </iframe> -->
+                </p>
             </div>
         </div>
     </div>

@@ -10,9 +10,9 @@
     <meta name="keyword"  content="">
     <link rel="shortcut icon" href="img/favicon_new.ico">
 
-    <title>Example Post using Keynote Layout - ZuRay | 前端攻城師</title>
+    <title>作用域與閉包 - ZuRay | 前端攻城師</title>
 
-    <link rel="canonical" href="intheblackworld.github.io/2015/07/09/js-module-7day/">
+    <link rel="canonical" href="intheblackworld.github.io/2016/03/08/test/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -62,7 +62,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">ZuRay Blog</a>
+            <a class="navbar-brand"  href="/">ZuRay Blog</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -130,40 +130,31 @@
 <!-- Post Header -->
 <style type="text/css">
     header.intro-header{
-        /*background-image: url('/img/post-bg-js-version.jpg')*/
-        height: 500px;
-        overflow: hidden;
-    }
-    header iframe{
-        width: 100%;
-        height: 100%;
-        border: 0;
+        background-image: url('/img/post-bg-js-version.jpg')
     }
 </style>
 <header class="intro-header" >
-    <iframe src="http://huangxuan.me/js-module-7day/"/>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <div class="post-heading">
-                        <div class="tags">
-                            
-                            <a class="tag" href="/tags/#前端开发" title="前端开发">前端开发</a>
-                            
-                            <a class="tag" href="/tags/#JavaScript" title="JavaScript">JavaScript</a>
-                            
-                        </div>
-                        <h1>Example Post using Keynote Layout</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
                         
+                        <a class="tag" href="/tags/#前端開發" title="前端開發">前端開發</a>
                         
-                        <h2 class="subheading">Keynote: JavaScript Modularization Journey</h2>
+                        <a class="tag" href="/tags/#JavaScript" title="JavaScript">JavaScript</a>
                         
-                        <span class="meta">Posted by Hux on July 9, 2015</span>
                     </div>
+                    <h1>作用域與閉包</h1>
+                    
+                    
+                    <h2 class="subheading"></h2>
+                    
+                    <span class="meta">Posted by ZuRay on March 8, 2016</span>
                 </div>
             </div>
         </div>
-    </iframe>
+    </div>
 </header>
 
 <!-- Post Content -->
@@ -171,42 +162,121 @@
     <div class="container">
         <div class="row">
 
-            <!-- Post Container -->
-            <div class="post-container
+    <!-- Post Container -->
+            <div class="
                 col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1 ">
+                col-md-10 col-md-offset-1
+                post-container">
 
-				<blockquote>
-  <p>下滑这里查看更多内容</p>
+				<h2 id="section">目標</h2>
+
+<blockquote>
+  <p>1.理解 js中var的作用域  <br />
+2.了解閉包的概念  <br />
+3.理解this的指向  </p>
 </blockquote>
 
-<p>7月9日，我在公司内部进行了名为「JavaScript 模块化七日谈」分享，并将该 Slides 分享到了微博上。出乎意料地，这篇微博先后被 @JS小组 @尤小右 @寸志 等近 200 人转发，阅读达到 10w，获得了还不错的评价。</p>
+<h2 id="ivar-">I.var 作用域重點整理</h2>
 
-<p>于是，我决定将它重新发到我的博客上，并为它专门制作了适用于 Keynote 展示文稿的新布局。它能自动根据屏幕大小/旋转以一定比例填充屏幕，你也可以直接点击下方链接在新页面打开，来获得更好的、沉浸式的全屏体验</p>
+<p><em>1.  內部函式可以取用外部函式的變數</em></p>
 
-<h3 id="watch-slides-httphuangxuanmejs-module-7day"><a href="http://huangxuan.me/js-module-7day">Watch Slides →</a></h3>
+<p><em>2.  外部函式不可取用內部函式的變數(var宣告的變數作用域在函式內)</em></p>
 
-<p><img src="http://huangxuan.me/js-module-7day/attach/qrcode.png" width="350" height="350" /></p>
+<p><em>3.  宣告變數時，不加var，變數會變成全域變數。</em></p>
 
-<p><small class="img-hint">你也可以通过扫描二维码在手机上观看</small></p>
+<h2 id="ii">II.閉包重點整理</h2>
 
-<p>这个 Web Slides 开源在<a href="https://github.com/Huxpro/js-module-7day">我的 Github 上</a>，欢迎你帮助我完善这个展示文稿，你可以给我提 issue，可以 fork &amp; pull request。如果它能帮助到你了，希望你还能不吝啬 star 一下这个项目</p>
+<blockquote>
+  <p>此段落參考<a href="http://coolshell.cn/articles/6731.html">理解javascript的閉包</a></p>
+</blockquote>
 
-<h3 id="catalog">Catalog</h3>
+<p><em>1.  閉包是可以讓外部函式取用內部函式的變量的方法</em></p>
 
-<ul>
-  <li>第一日 上古时期 <strong><em>Module?</em></strong> 从设计模式说起</li>
-  <li>第二日 石器时代 <strong><em>Script Loader</em></strong> 只有封装性可不够，我们还需要加载</li>
-  <li>第三日 蒸汽朋克 <strong><em>Module Loader</em></strong> 模块化架构的工业革命</li>
-  <li>第四日 号角吹响 <strong><em>CommonJS</em></strong> 征服世界的第一步是跳出浏览器</li>
-  <li>第五日 双塔奇兵 <strong><em>AMD/CMD</em></strong> 浏览器环境模块化方案</li>
-  <li>第六日 精灵宝钻 <strong><em>Browserify/Webpack</em></strong> 大势所趋，去掉这层包裹！</li>
-  <li>第七日 王者归来 <strong><em>ES6 Module</em></strong> 最后的战役</li>
-</ul>
+<p><em>2.  當在一個函數內定義另外一個函數就會產生閉包</em></p>
 
-<h3 id="thanks">Thanks</h3>
+<pre><code>function greeting(name){
+  var text = alert("Hello" + name);
+}
 
-<p><a href="http://lab.hakim.se/reveal-js">Reveal.js</a></p>
+var sayHello = greeting("Closure");  //不加這一行，sayHello()無法取用text這個內部函式的變數
+sayHello();
+</code></pre>
+
+<ol>
+  <li>閉包中的5個實例</li>
+</ol>
+
+<h2 id="iii-this">III. this的四種類型</h2>
+<p><em>1.  函式有所屬對象時，指向所屬對象</em>  </p>
+
+<pre><code>var myObject = {value :  100 };
+ myObject.getValue  =  function () {
+   console.log ( this.value );   //輸出100
+
+  //輸出{ value: 100, getValue: [Function] }，
+  //其實就是myObject對象本身
+  console.log ( this );
+
+  return  this.value ;
+};
+
+console.log ( myObject.getValue ()); // =&gt; 100
+</code></pre>
+
+<p><em>2.  沒調用對象就指向全局對象</em>  </p>
+
+<pre><code>var myObject = {value :  100 };
+ myObject.getValue  =  function () {
+   var  foo  =  function () {
+     console.log ( this.value ) // =&gt; undefined
+    console.log ( this ); //輸出全局對象global
+  };
+
+  foo ();
+
+  return  this.value ;
+};
+
+console.log ( myObject . getValue ()); // =&gt; 100
+</code></pre>
+
+<p>在上述代碼塊中，foo函數雖然定義在getValue的函數體內，但實際上它既不屬於getValue也不屬於myObject。foo並沒有被綁定在任何對像上，所以當調用時，它的this指針指向了全局對象global。<br />
+<em>3.  構造器中的this，指向新對象</em>  </p>
+
+<pre><code>var  SomeClass  =  function (){
+   this.value  =  100 ;
+}
+
+var myCreate =  new  SomeClass ();
+
+console.log ( myCreate.value ); //輸出100
+</code></pre>
+<p><em>4.  apply和call以及bind綁定，會指向綁定的對象</em>  </p>
+
+<p>apply() 方法接受兩個參數第一個是函數運行的作用域，另外一個是一個參數數組(arguments)。  </p>
+
+<p>call() 方法第一個參數的意義與apply() 方法相同，只是其他的參數需要一個個列舉出來。  </p>
+
+<p>簡單來說，call 的方式更接近我們平時調用函數，而​​apply 需要我們傳遞Array 形式的數組給它。它們是可以互相轉換的。  </p>
+
+<pre><code>var myObject = {value :  100 };
+
+var  foo  =  function (){
+   console.log ( this );
+};
+
+foo (); //全局變量global
+foo.apply (myObject); // { value: 100 }
+foo.call (myObject); // { value: 100 }
+
+var newFoo =  foo.bind (myObject);
+ newFoo (); // { value: 100 }
+</code></pre>
+
+<h3 id="section-1">參考資源</h3>
+<p><a href="https://github.com/alsotang/node-lessons/tree/master/lesson11">作用域與閉包：this，var，(function () {})</a>  </p>
+
+<p><a href="http://coolshell.cn/articles/6731.html">理解javascript的閉包</a></p>
 
 
                 <hr>
@@ -214,99 +284,77 @@
                 
                 <!-- 多说 Share start -->
                 </style>
-                <div class="ds-share"
-                    style="text-align: right"
-                    data-thread-key="/2015/07/09/js-module-7day" data-title="Example Post using Keynote Layout"
-                    data-images="intheblackworld.github.io/img/post-bg-js-version.jpg"
-                    data-content="
-  下滑这里查看更多内容
 
-
-7月9日，我在公司内部进行了名为「JavaScript 模块化七日谈」分享，并将该 Slides 分享到了微博上。出乎意料... | Hux Blog，@Hux黄玄 的个人博客"
-                    data-url="intheblackworld.github.io/2015/07/09/js-module-7day/">
-                    <div class="ds-share-inline">
-                      <ul  class="ds-share-icons-16">
-                        <li data-toggle="ds-share-icons-more"><a class="ds-more" href="#">分享到：</a></li>
-                        <li><a class="ds-wechat flat" href="javascript:void(0);" data-service="wechat">微信</a></li>
-                        <li><a class="ds-weibo flat" href="javascript:void(0);" data-service="weibo">微博</a></li>
-                        <li><a class="ds-douban flat" href="javascript:void(0);" data-service="douban">豆瓣</a></li>
-                      </ul>
-                      <div class="ds-share-icons-more">
-                      </div>
-                    </div>
-                <hr>
-                </div>
-                <!-- 多少 Share end-->
+                <!-- 多说 Share end-->
                 
 
 
                 <ul class="pager">
                     
-                    <li class="previous">
-                        <a href="/2015/05/25/js-module-loader/" data-toggle="tooltip" data-placement="top" title="Example Post with Code Highlight">&larr; Previous Post</a>
-                    </li>
-                    
                     
                     <li class="next">
-                        <a href="/2015/09/22/js-version/" data-toggle="tooltip" data-placement="top" title="Example Post">Next Post &rarr;</a>
+                        <a href="/2016/03/13/reactjs1/" data-toggle="tooltip" data-placement="top" title="React初探 partI">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
 
 
-                
-                <!-- 多说评论框 start -->
-                <div class="comment">
-                    <div class="ds-thread"
-                        data-thread-key="/2015/07/09/js-module-7day"
-                        data-title="Example Post using Keynote Layout"
-                        data-url="intheblackworld.github.io/2015/07/09/js-module-7day/" >
-                    </div>
-                </div>
-                <!-- 多说评论框 end -->
-                
+
 
                 
+<div id="disqus_thread"></div>
+    <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'intheblackworld'; // required: replace example with your forum shortname
+    var disqus_identifier = '/2016/03/08/test/';
+    var disqus_url = 'http://intheblackworld.github.com/2016/03/08/test/';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+    </noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
 
             </div>
 
-            <!-- Sidebar Container -->
-            <div class="sidebar-container
+    <!-- Sidebar Container -->
+            <div class="
                 col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1 ">
+                col-md-10 col-md-offset-1
+                sidebar-container">
 
                 <!-- Featured Tags -->
-                
+                <!-- 
                 <section>
                     <hr class="hidden-sm hidden-xs">
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
-                        
+        				
                             
-                        
-                            
-                        
-                            
-                        
-                            
-                        
-                            
-                                <a href="/tags/#前端开发" title="前端开发" rel="3">
-                                    前端开发
+                				<a href="/tags/#前端開發" title="前端開發" rel="2">
+                                    前端開發
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#JavaScript" title="JavaScript" rel="3">
+                				<a href="/tags/#JavaScript" title="JavaScript" rel="2">
                                     JavaScript
                                 </a>
                             
-                        
+        				
                             
-                        
-                    </div>
+        				
+        			</div>
                 </section>
-                
+                 -->
 
                 <!-- Friends Blog -->
                 
@@ -321,31 +369,8 @@
     </div>
 </article>
 
-<!-- resize header to fullscreen keynotes -->
-<script>
-    var $header = document.getElementsByTagName("header")[0];
-    function resize(){
-        /*
-         * leave 85px to both
-         * - told/imply users that there has more content below
-         * - let user can scroll in mobile device, seeing the keynote-view is unscrollable
-         */
-        $header.style.height = (window.innerHeight-85) + 'px';
-    }
-    document.addEventListener('DOMContentLoaded', function(){
-        resize();
-    })
-    window.addEventListener('load', function(){
-        resize();
-    })
-    window.addEventListener('resize', function(){
-        resize();
-    })
-    resize();
-</script>
+<!-- 
 
-
-<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">
     // dynamic User by Hux
     var _user = 'ZuRay';
@@ -362,8 +387,7 @@
     })();
 </script>
 <!-- 多说公共JS代码 end -->
-
-
+<!--  -->
 
 
 
@@ -440,16 +464,16 @@
                     </li>
                     
                 </ul>
-             <!--    <p class="copyright text-muted">
+                <p class="copyright text-muted">
                     Copyright &copy; ZuRay Blog 2016
                     <br>
-                    Theme by <a href="http://huangxuan.me">Hux</a> |
+                   <!--  Theme by <a href="http://huangxuan.me">Hux</a> |
                     <iframe
                         style="margin-left: 2px; margin-bottom:-5px;"
                         frameborder="0" scrolling="0" width="91px" height="20px"
                         src="https://ghbtns.com/github-btn.html?user=huxpro&repo=huxpro.github.io&type=star&count=true" >
-                    </iframe>
-                </p> -->
+                    </iframe> -->
+                </p>
             </div>
         </div>
     </div>

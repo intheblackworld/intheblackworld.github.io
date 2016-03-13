@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "React初探 partII"
-subtitle:   "createFactory, createClass, createElement差別 ＆React 語法＆React Props"
+subtitle:   "測試"
 date:       2016-3-13
 author:     "ZuRay"
 comments: true

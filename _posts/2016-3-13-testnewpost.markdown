@@ -7,7 +7,7 @@ author:     "ZuRay"
 comments: true
 header-img: "img/post-bg-js-version.jpg"
 related: [
-    "React初探 partI", 
+    "React初探 partI"
 ]
 tags:
     - 前端開發

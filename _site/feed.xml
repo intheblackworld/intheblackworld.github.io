@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ZuRay Blog</title>
+    <description></description>
+    <link>intheblackworld.github.io/</link>
+    <atom:link href="intheblackworld.github.io/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Sun, 13 Mar 2016 03:47:22 +0800</pubDate>
+    <lastBuildDate>Sun, 13 Mar 2016 03:47:22 +0800</lastBuildDate>
+    <generator>Jekyll v2.4.0</generator>
+    
+      <item>
+        <title>React初探 partI</title>
+        <description>&lt;h2 id=&quot;section&quot;&gt;目標&lt;/h2&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;1.理解createFactory, createClass, createElement差別  &lt;br /&gt;
+2.some React 語法  &lt;br /&gt;
+3.React Props研究&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;icreatefactory-createclass-createelement&quot;&gt;I.createFactory, createClass, createElement差別&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;createClass&lt;/strong&gt; : 建立元件類別，建立React 組件對應的類別，描述你將要創建組件的各種行為&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var Hello = React.createClass({
+    render: function() {
+        return &amp;lt;div&amp;gt;Hello Taobao, Hello UED&amp;lt;/div&amp;gt;;
+    }
+
+});
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;createElement&lt;/strong&gt;: 建立元件，支持type, config, children三個參數。&lt;br /&gt;
+&amp;gt; ex: 在jsx為&lt;hello&gt;&lt;/hello&gt; ，在js就是 React.createElement(Hello);  &lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ReactElement.createElement = function(type, config, children) {
+  ...
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;createFactory&lt;/strong&gt; : 透過工廠方法建立React元件實例，目的是隔離與簡化建立元件的過程。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ReactElement.createFactory = function(type) {
+  var factory = ReactElement.createElement.bind(null, type);
+  return factory;
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;ii-react-&quot;&gt;II. React 語法&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;React.createClass()&lt;/strong&gt;  &lt;/p&gt;
+
+&lt;p&gt;建立元件類別  &lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; var Component = React.createClass({
+    render: function() {}
+})
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;React.render()&lt;/strong&gt;  &lt;/p&gt;
+
+&lt;p&gt;渲染元件，透過此方法將元件繪製到指定位置，概念有點像是AfterEffect渲染輸出  &lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; React.render(React.createElement(Editor), document.body);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;this.props 元件屬性&lt;/strong&gt;  &lt;/p&gt;
+
+&lt;p&gt;可以在元件建立時指定此元件的屬性  &lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class HelloMessage extends React.Component {
+  render() {
+    return &amp;lt;div&amp;gt;Hello {this.props.name}&amp;lt;/div&amp;gt;;
+  }
+}
+ReactDOM.render(&amp;lt;HelloMessage name=&quot;Sebastian&quot; /&amp;gt;, mountNode);
+    // es6寫法
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;this.state 元件狀態&lt;/strong&gt;  &lt;/p&gt;
+
+&lt;p&gt;用在內部事件的操作，例如使用者用滑鼠點擊了某個元件，然後觸發了某個內部事件，然後操作了某個物件屬性，這個物件就叫做this.state，用來儲存元件的狀態。  &lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var Editor = React.createClass({
+    // 初始化 state 物件，並設定屬性 count 為 0
+
+    getInitialState: function() {
+        return {count: 0,id:&quot;react&quot;};
+    },
+    // 函式，設定state物件，將 count +1
+
+    handleChange: function(event){
+      var count = this.state.count+1;
+      //千萬不要直接從this.state設定物件的值，
+
+      //一定要用setState來設定內容，因為這樣setState才會通知對應的render重新繪製元件狀態。
+
+      //text 表示 元件的 內容，count 表示 元件的 state.count 值
+
+        this.setState({count:count});  
+
+    },
+    shouldComponentUpdate : function(){
+        console.log(&quot;呼叫setState時，react會執行這個方法&quot;);
+        return true;
+    },
+    // 繪製，並且在attr中設定 onClick 事件 對應到 handleChange ，而內文為 this.state.count;
+
+    render: function() {
+        return React.createElement(
+          &#39;div&#39;, //tagname
+
+          {id:this.state.id,onClick: this.handleChange}, //attr
+
+          this.state.count // text
+
+        );
+    }
+});
+React.render(React.createElement(Editor),document.getElementById(&#39;editor&#39;));
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;iii-this-props-&quot;&gt;III. this props 解析&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;直接參考這一篇文章 &lt;a href=&quot;http://jamestw.logdown.com/posts/256047-reactjs&quot;&gt;Reactjs 的 props&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;參考資源&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.zhihu.com/question/27602269&quot;&gt;react中createFactory, createClass, createElement分別在什麼場景下使用，為什麼要這麼定義？&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://www.quora.com/What-is-the-difference-between-React-createClass-React-createElement-React-createFactory-and-React-createMixin&quot;&gt;What is the difference between React.createClass, React.createElement, React.createFactory and React.createMixin?&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;http://jamestw.logdown.com/posts/248317-react-one-step-at-a-time&quot;&gt;React 閱讀筆記&lt;/a&gt;  &lt;/p&gt;
+</description>
+        <pubDate>Sun, 13 Mar 2016 00:00:00 +0800</pubDate>
+        <link>intheblackworld.github.io/2016/03/13/reactjs1/</link>
+        <guid isPermaLink="true">intheblackworld.github.io/2016/03/13/reactjs1/</guid>
+        
+        <category>前端開發</category>
+        
+        <category>JavaScript</category>
+        
+        <category>React</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>作用域與閉包</title>
+        <description>&lt;h2 id=&quot;section&quot;&gt;目標&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;1.理解 js中var的作用域  &lt;br /&gt;
+2.了解閉包的概念  &lt;br /&gt;
+3.理解this的指向  &lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;ivar-&quot;&gt;I.var 作用域重點整理&lt;/h2&gt;
+
+&lt;p&gt;&lt;em&gt;1.  內部函式可以取用外部函式的變數&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;2.  外部函式不可取用內部函式的變數(var宣告的變數作用域在函式內)&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;3.  宣告變數時，不加var，變數會變成全域變數。&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;ii&quot;&gt;II.閉包重點整理&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;此段落參考&lt;a href=&quot;http://coolshell.cn/articles/6731.html&quot;&gt;理解javascript的閉包&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;em&gt;1.  閉包是可以讓外部函式取用內部函式的變量的方法&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;2.  當在一個函數內定義另外一個函數就會產生閉包&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;function greeting(name){
+  var text = alert(&quot;Hello&quot; + name);
+}
+
+var sayHello = greeting(&quot;Closure&quot;);  //不加這一行，sayHello()無法取用text這個內部函式的變數
+sayHello();
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;閉包中的5個實例&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;iii-this&quot;&gt;III. this的四種類型&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;1.  函式有所屬對象時，指向所屬對象&lt;/em&gt;  &lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var myObject = {value :  100 };
+ myObject.getValue  =  function () {
+   console.log ( this.value );   //輸出100
+
+  //輸出{ value: 100, getValue: [Function] }，
+  //其實就是myObject對象本身
+  console.log ( this );
+
+  return  this.value ;
+};
+
+console.log ( myObject.getValue ()); // =&amp;gt; 100
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;em&gt;2.  沒調用對象就指向全局對象&lt;/em&gt;  &lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var myObject = {value :  100 };
+ myObject.getValue  =  function () {
+   var  foo  =  function () {
+     console.log ( this.value ) // =&amp;gt; undefined
+    console.log ( this ); //輸出全局對象global
+  };
+
+  foo ();
+
+  return  this.value ;
+};
+
+console.log ( myObject . getValue ()); // =&amp;gt; 100
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;在上述代碼塊中，foo函數雖然定義在getValue的函數體內，但實際上它既不屬於getValue也不屬於myObject。foo並沒有被綁定在任何對像上，所以當調用時，它的this指針指向了全局對象global。&lt;br /&gt;
+&lt;em&gt;3.  構造器中的this，指向新對象&lt;/em&gt;  &lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var  SomeClass  =  function (){
+   this.value  =  100 ;
+}
+
+var myCreate =  new  SomeClass ();
+
+console.log ( myCreate.value ); //輸出100
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;em&gt;4.  apply和call以及bind綁定，會指向綁定的對象&lt;/em&gt;  &lt;/p&gt;
+
+&lt;p&gt;apply() 方法接受兩個參數第一個是函數運行的作用域，另外一個是一個參數數組(arguments)。  &lt;/p&gt;
+
+&lt;p&gt;call() 方法第一個參數的意義與apply() 方法相同，只是其他的參數需要一個個列舉出來。  &lt;/p&gt;
+
+&lt;p&gt;簡單來說，call 的方式更接近我們平時調用函數，而​​apply 需要我們傳遞Array 形式的數組給它。它們是可以互相轉換的。  &lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var myObject = {value :  100 };
+
+var  foo  =  function (){
+   console.log ( this );
+};
+
+foo (); //全局變量global
+foo.apply (myObject); // { value: 100 }
+foo.call (myObject); // { value: 100 }
+
+var newFoo =  foo.bind (myObject);
+ newFoo (); // { value: 100 }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;參考資源&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/alsotang/node-lessons/tree/master/lesson11&quot;&gt;作用域與閉包：this，var，(function () {})&lt;/a&gt;  &lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://coolshell.cn/articles/6731.html&quot;&gt;理解javascript的閉包&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Tue, 08 Mar 2016 00:00:00 +0800</pubDate>
+        <link>intheblackworld.github.io/2016/03/08/test/</link>
+        <guid isPermaLink="true">intheblackworld.github.io/2016/03/08/test/</guid>
+        
+        <category>前端開發</category>
+        
+        <category>JavaScript</category>
+        
+        
+      </item>
+    
+  </channel>
+</rss>
